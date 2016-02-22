@@ -3,3 +3,7 @@ dist
 .tmp
 .sass-cache
 bower_components
+test
+.idea
+*.png
+firebase.json

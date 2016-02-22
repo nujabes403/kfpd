@@ -1,17 +1,19 @@
 <md-whiteframe class="md-whiteframe-3dp"
                style="max-width:1024px"
-               layout="column" layout-align="center center">
+               layout="column" layout-align="center start">
 
     <div layout="row" flex layout-align="start center" style="width:100%">
         <div class="md-title"> 새로운 후렘제품 </div>
         <span flex></span>
         <md-button class="md-raised" href="#/frames">목록</md-button>
     </div>
+    <p class="md-caption"> 폼을 작성하신뒤 <b>등록버튼</b> 누르셔서 저장을 하실수 있습니다. </p>
+    <p class="md-caption"> <b>취소버튼</b> 누르시면 작성된 폼을 리셋을 합니다. </p>
 
     <md-content style="width:100%;">
         <form name="cstForm" ng-submit="createFrame()">
             <md-button class="md-primary md-raised" type="submit"> 등록 </md-button>
-            <md-button class="md-warn md-raised" ng-click="customerForm=null;"> 취소하기 </md-button>
+            <md-button class="md-warn md-raised" ng-click="customerForm=null;"> 취소 </md-button>
 
             <md-toolbar style="   background-color: white; color: black; height: 32px; min-height:0px;">
                 <h2 class="md-toolbar-tools">
@@ -46,16 +48,16 @@
 
                     <div style="height:84px;">
                         <label> 편개/양개 </label>
-                        <md-radio-group ng-model="customerForm.doorType" layout="row" layout-align="start start">
-                            <md-radio-button value=true class="md-primary"> 편개 </md-radio-button>
-                            <md-radio-button value=false class="md-primary"> 양개 </md-radio-button>
+                        <md-radio-group ng-init="customerForm.doorType=true" ng-model="customerForm.doorType" layout="row" layout-align="start start">
+                            <md-radio-button ng-value='true' class="md-primary"> 편개 </md-radio-button>
+                            <md-radio-button ng-value='false' class="md-primary"> 양개 </md-radio-button>
                         </md-radio-group>
                     </div>
                     <div style="height:84px;">
                         <label> 원클릭 입력 </label>
-                        <md-radio-group ng-model="customerForm.published" layout="row" layout-align="start start">
-                            <md-radio-button value=true class="md-primary"> 사용 </md-radio-button>
-                            <md-radio-button value=false class="md-primary"> 사용안함 </md-radio-button>
+                        <md-radio-group ng-init="customerForm.published=true" ng-model="customerForm.published" layout="row" layout-align="start start">
+                            <md-radio-button ng-value='true' class="md-primary"> 사용 </md-radio-button>
+                            <md-radio-button ng-value='false' class="md-primary"> 사용안함 </md-radio-button>
                         </md-radio-group>
                     </div>
                 </div>
@@ -63,7 +65,7 @@
                 <div flex="50" flex-xs="100" layout="column">
                     <div style="height:84px;">
                         <label>종류</label>
-                        <md-radio-group ng-model="customerForm.type" layout="row" layout-align="start start">
+                        <md-radio-group ng-init="customerForm.type=1" ng-model="customerForm.type" layout="row" layout-align="start start">
                             <md-radio-button value=1 class="md-primary">일반</md-radio-button>
                             <md-radio-button value=2 class="md-primary">스텐</md-radio-button>
                             <md-radio-button value=3 class="md-primary">매립</md-radio-button>
@@ -73,12 +75,16 @@
                     </div>
                     <div>
                         <label>철판 두께</label>
-                        <md-radio-group ng-model="customerForm.thick" layout="column">
-                            <md-radio-button value=1 class="md-primary">0.8T</md-radio-button>
-                            <md-radio-button value=2 class="md-primary">1.2T</md-radio-button>
-                            <md-radio-button value=3 class="md-primary">1.6T</md-radio-button>
-                            <md-radio-button value=4 class="md-primary">직접입력</md-radio-button>
-                            <div> <input type="number"> <span> T </span> </div>
+                        <md-radio-group ng-init="customerForm.thick=1" ng-model="customerForm.thick" layout="column">
+                            <md-radio-button ng-value="1" class="md-primary">0.8T</md-radio-button>
+                            <md-radio-button ng-value="2" class="md-primary">1.2T</md-radio-button>
+                            <md-radio-button ng-value="3" class="md-primary">1.6T</md-radio-button>
+                            <md-radio-button ng-value="4" class="md-primary">
+                                직접입력
+                                <div ng-show="customerForm.thick == '4'">
+                                    <input type="number" ng-model="customerForm.custThick"> <span> T </span>
+                                </div>
+                            </md-radio-button>
                         </md-radio-group>
                     </div>
                     <div>
@@ -116,12 +122,12 @@
                 </div>
             </div>
 
-
-            <md-button class="md-primary md-raised" ng-click="showAdvanced($event)" flex="100" flex-gt-md="auto">
-                옵션 만들기
+            <div class="md-body-1"> 추가 옵션을 관리 하실수 있습니다. </div>
+            <md-button class="md-raised" ng-click="showAdvanced($event)" flex="100" flex-gt-md="auto">
+                새로운 옵션 만들기
             </md-button>
-            <md-button class="md-primary md-raised" ng-click="showOptions($event)" flex="100" flex-gt-md="auto">
-                옵션 리스트
+            <md-button class="md-raised" ng-click="showOptions($event)" flex="100" flex-gt-md="auto">
+                옵션 추가 리스트
             </md-button>
             <pre>{{frameOptions}}</pre>
             <!--<div layout="row" style="width:100%; padding:7px;">-->
@@ -235,6 +241,9 @@
                     <textarea ng-model="customerForm.note" md-maxlength="150" rows="5" md-select-on-focus></textarea>
                 </md-input-container>
             </div>
+
+            <md-button class="md-primary md-raised" type="submit"> 등록 </md-button>
+            <md-button class="md-warn md-raised" ng-click="customerForm=null;"> 취소 </md-button>
         </form>
 
 

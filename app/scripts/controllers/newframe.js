@@ -14,13 +14,13 @@ angular.module('initApp')
     var options = new Firebase(FBURL).child('frameOptions');
     var targetOptions = options.orderByChild('published').equalTo(true);
     $scope.frameOptions = $firebaseArray(targetOptions);
-    $scope.customerForm={ op1:0, op2:0, op3:0, op4:0,op5:0,op6:0,op7:0,op8:0,op9:0,op10:0,op11:0,op12:0,op13:0,op14:0,op15:0,op16:0};
+    //$scope.customerForm={ op1:0, op2:0, op3:0, op4:0,op5:0,op6:0,op7:0,op8:0,op9:0,op10:0,op11:0,op12:0,op13:0,op14:0,op15:0,op16:0};
 
 
     $scope.showAdvanced = function(ev) {
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
       $mdDialog.show({
-          controller: DialogController,
+          controller: 'DialogCtrl',
           templateUrl: 'views/tmp/dialog1.tmp.html',
           parent: angular.element(document.body),
           targetEvent: ev,
@@ -41,7 +41,7 @@ angular.module('initApp')
     $scope.showOptions = function(ev) {
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
       $mdDialog.show({
-          controller: OptionListDialogController,
+          controller: 'OptionListDialogCtrl',
           templateUrl: 'views/tmp/frameOptionList.tmp.html',
           parent: angular.element(document.body),
           targetEvent: ev,
@@ -84,51 +84,13 @@ angular.module('initApp')
         }
       };
       var newCustomer = frimeRef.push();
-      newCustomer.set($scope.customerForm, onComplete);
+      console.log('d');
+      $scope.customerForm.options = [];
 
-    }
-
-  });
-function OptionListDialogController($scope, $mdDialog, FBURL, $firebaseArray, FrameService) {
-  var optionRef = new Firebase(FBURL).child('frameOptions');
-  $scope.options = $firebaseArray(optionRef);
-  $scope.updatePubStatus = function(index){
-    $scope.options.$save(index);
-  }
-  $scope.answer = function(answer) {
-    $scope.options.$save()
-    $mdDialog.hide(answer);
-  };
-}
-function DialogController($scope, $mdDialog, FBURL, $firebaseObject, FrameService) {
-  $scope.hide = function() {
-    $mdDialog.hide();
-  };
-  $scope.cancel = function() {
-    $mdDialog.cancel();
-  };
-  $scope.answer = function(answer) {
-    $mdDialog.hide(answer);
-  };
-  $scope.optionForm = {name:'', price:0, published: true};
-  $scope.isDup = false;
-  var optionRef = new Firebase(FBURL).child('frameOptions')
-  $scope.checkDuplicate = function(){
-    console.log('check');
-    if($scope.optionForm.name.length !== 0){
-      var result = $firebaseObject(optionRef.child($scope.optionForm.name));
-      result.$loaded().then(function(data){
-        console.log(data)
-        if(data.name==null){
-          $scope.isDup = false;
-        }
-        else{
-          $scope.isDup = true;
-        }
+      $scope.frameOptions.forEach(function(val){
+        var option = {name: val.name, price:val.price}
+        $scope.customerForm.options.push(option)
       })
+      newCustomer.set($scope.customerForm, onComplete);
     }
-  }
-  $scope.createOptions = function(){
-    FrameService.createOptions($scope.optionForm)
-  }
-}
+  });
