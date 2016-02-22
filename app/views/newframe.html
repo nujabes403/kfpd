@@ -79,12 +79,10 @@
                             <md-radio-button ng-value="1" class="md-primary">0.8T</md-radio-button>
                             <md-radio-button ng-value="2" class="md-primary">1.2T</md-radio-button>
                             <md-radio-button ng-value="3" class="md-primary">1.6T</md-radio-button>
-                            <md-radio-button ng-value="4" class="md-primary">
-                                직접입력
-                                <div ng-show="customerForm.thick == '4'">
-                                    <input type="number" ng-model="customerForm.custThick"> <span> T </span>
-                                </div>
-                            </md-radio-button>
+                            <md-radio-button ng-value="4" class="md-primary">직접입력</md-radio-button>
+                            <div ng-show="customerForm.thick == '4'">
+                                <input type="number" ng-model="customerForm.custThick"> <span> T </span>
+                            </div>
                         </md-radio-group>
                     </div>
                     <div>
