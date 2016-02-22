@@ -1,0 +1,147 @@
+<style>
+    md-input-container {
+        display: inline-block;
+        position: relative;
+        padding: 2px;
+        margin: 13px 0;
+        vertical-align: middle;
+    }
+</style>
+<md-whiteframe class="md-whiteframe-3dp"
+               style="max-width:1024px"
+               layout="column" layout-align="center center">
+
+    <div layout="row" flex layout-align="start center" style="width:100%">
+        <div class="md-title"> 새로운 거래처관리 </div>
+        <span flex></span>
+        <md-button class="md-raised" href="#/customer">목록</md-button>
+    </div>
+
+    <md-content style="width:100%;" layout-padding>
+        <form name="cstForm" ng-submit="createCustomer()">
+            <md-button type="submit"> 등록 </md-button>
+            <md-button ng-click="customerForm=null;"> 취소하기 </md-button>
+            <div layout="row" style="width:100%;">
+                <div class="md-caption" flex="50" layout="column">
+                    <div>
+                        <md-input-container class="md-block">
+                            <input ng-change="checkDuplicate()" ng-model="customerForm.name" name="cstName" type="text" required placeholder="거래처명">
+                            <div class="hint" ng-if="isDup"><span style="color:red"> <b>{{customerForm.name}}</b> 거래처명은 이미 등록이 되어 있습니다. </span> <a target="_blank" href="#/customerDetail/{{customerForm.name}}">{{customerForm.name}} 다른창으로 열기</a></div>
+                            <div class="hint" ng-if="!isDup">{{customerForm.name}} 거래처명은 사용하실수 있습니다. </div>
+                            <div ng-messages="cstForm.cstName.$error" ng-if="!showHints">
+                                <div ng-message="required">거래처명는 필수 항목 입니다.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-input-container class="md-block">
+                            <input ng-model="customerForm.president" type="text" placeholder="대표자">
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-input-container class="md-block">
+                            <input ng-model="customerForm.zipcode" type="text" placeholder="우편번호">
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-input-container class="md-block">
+                            <input ng-model="customerForm.tel_no" type="text" placeholder="전화번호">
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-input-container class="md-block">
+                            <input ng-model="customerForm.fax_no" type="text" placeholder="팩스번호">
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-input-container class="md-block">
+                            <input ng-model="customerForm.bank_cd" type="text" placeholder="주거래은행">
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-input-container class="md-block">
+                            <input ng-model="customerForm.depositor" type="text" placeholder="예금주명">
+                        </md-input-container>
+                    </div>
+                    <div style="height:84px;">
+                        <md-input-container class="md-block">
+                            <md-checkbox ng-model="customerForm.receivable_yn" aria-label="notPaid">
+                                미수현황
+                            </md-checkbox>
+                        </md-input-container>
+                    </div>
+                    <div style="height:84px;">
+                        <md-input-container class="md-block">
+                            <md-checkbox ng-model="customerForm.blacklist_yn" aria-label="isBlack">
+                                블랙리스트여부
+                            </md-checkbox>
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-input-container class="md-block">
+                            <input ng-model="customerForm.depositor" type="number" placeholder="초기외상 매출금(원)">
+                        </md-input-container>
+                    </div>
+                </div>
+                <div class="md-caption" flex="50" layout="column">
+                    <div style="height:84px;">
+                        <label>거래처 구분</label>
+                        <md-radio-group ng-model="customerForm.isIndividual" layout="row" layout-align="space-around center">
+                            <md-radio-button value=true class="md-primary">개인</md-radio-button>
+                            <md-radio-button value=false> 거래처 </md-radio-button>
+                        </md-radio-group>
+                    </div>
+                    <div>
+                        <md-input-container class="md-block">
+                            <input ng-model="customerForm.business_no" type="text" placeholder="사업자 번호">
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-input-container class="md-block">
+                            <input ng-model="customerForm.address" type="text" placeholder="주소">
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-input-container class="md-block">
+                            <input ng-model="customerForm.mobile_no" type="text" placeholder="휴대폰 번호">
+                        </md-input-container>
+                    </div>
+                    <div layout="column" style="height: 84px;">
+                        <label>거래 시작일</label>
+                            <md-datepicker ng-model="customerForm.deal_begin_dt" md-placeholder="거래 시작일">
+                            </md-datepicker>
+
+                    </div>
+                    <div>
+                        <md-input-container class="md-block">
+                            <input ng-model="customerForm.account_no" type="text" placeholder="계좌번호">
+                        </md-input-container>
+                    </div>
+                    <div style="height:84px;">
+                        <label>매출/매일 여부</label>
+                        <md-input-container class="md-block" layout="row" layout-align="space-around center">
+                            <md-checkbox ng-model="customerForm.supplier_yn" aria-label="notPaid">
+                                매입처
+                            </md-checkbox>
+                            <md-checkbox ng-model="customerForm.sales_yn" aria-label="notPaid">
+                                매출처
+                            </md-checkbox>
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-input-container class="md-block">
+                            <input ng-model="customerForm.receivable_note" type="text" placeholder="미수현황비고">
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-input-container class="md-block">
+                            <input ng-model="customerForm.owemone_no" type="number" placeholder="저기 외상 매입금(원)">
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </md-content>
+
+</md-whiteframe>

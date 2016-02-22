@@ -1,0 +1,31 @@
+{
+  "rules": {
+    "customers": {
+      ".read": "true",
+      ".write": "true"
+    },
+    "testCustomers": {
+      ".read": "true",
+      "$id": {
+        ".validate": "newData.hasChildren(['name', 'modified', 'created', 'president'])",
+        "name": {
+          ".validate": "newData.isString()"
+        },
+        "modified": {
+          ".validate": "newData.isNumber() && newData.val() == now"
+        },
+        "created": {
+          ".validate": "newData.isNumber() && newData.val() == (data.val() == null ? now : data.val())"
+        },
+        "president": {
+          ".validate": "newData.isString()"
+        },
+        "$other": {
+          ".validate": "false"
+        },
+        ".read": "true",
+        ".write": "data.val() == null"
+      }
+    }
+  }
+}

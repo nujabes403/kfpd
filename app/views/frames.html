@@ -1,0 +1,39 @@
+<md-whiteframe class="md-whiteframe-3dp"
+               style="max-width:1024px"
+               layout="column" layout-align="center center">
+
+    <div layout="row" flex layout-align="start center" style="width:100%">
+        <div class="md-title"> 후렘 관리 </div>
+        <span flex></span>
+        <md-button class="md-raised" href="#/newFrame"> 후렘등록 </md-button>
+    </div>
+
+    <md-content>
+        <div class="table-responsive">
+            <table class="table md-caption">
+                <thead>
+                <tr>
+                    <th>종류</th>
+                    <th>바폭</th>
+                    <th>철판</th>
+                    <th>편개/양개</th>
+                    <th>폭</th>
+                    <th>높이</th>
+                    <th>가격</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-click="goToDetail(fr.$id)" ng-repeat="fr in frames track by $index">
+                    <td>{{fr.type | frameType}}</td>
+                    <td>{{fr.barMin}}바 ~ {{fr.barMax}}바</td>
+                    <td>{{fr.thick}}</td>
+                    <td>{{fr.doorType | frameDoorType}}</td>
+                    <td>{{fr.width}}</td>
+                    <td>{{fr.height}}</td>
+                    <td>{{fr.orgPrice}}원</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </md-content>
+</md-whiteframe>

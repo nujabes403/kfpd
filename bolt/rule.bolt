@@ -1,0 +1,34 @@
+
+path /customers {
+read() { true }
+write() { true }
+}
+
+// Allow anyone to read the list of Posts.
+path /testCustomers {
+read() { true }
+}
+
+// All individual Posts are writable by anyone.
+path /testCustomers/{id} is TestCustomer {
+write() { createOnly(this) }
+read() { true }
+}
+
+type TestCustomer {
+name: String,
+modified: CurrentTimestamp,
+created: InitialTimestamp,
+president: String
+}
+
+type InitialTimestamp extends Number {
+validate() {initial(this, now)}
+}
+type CurrentTimestamp extends Number {
+ validate() {this == now}
+}
+
+initial(value, init) { value == (prior(value) == null ? init: prior(value))}
+isSignedIn() { auth != null }
+createOnly(value){prior(value) == null}

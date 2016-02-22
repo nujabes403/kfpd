@@ -1,0 +1,35 @@
+div.padded {
+  background: #fff;
+  margin: 30px;
+  height: 100px; }
+
+@media screen and (max-width: 599px) {
+  div.padded {
+    margin: 7px;
+    height: 50px;
+    background-color: #c8e4fa; }
+  div.padded > span {
+    font-size: 0.4em; } }
+
+@media screen and (min-width: 600px) and (max-width: 959px) {
+  div.padded {
+    margin: 20px;
+    height: 75px; }
+  div.padded > span {
+    font-size: 0.6em; } }
+
+@media screen and (min-width: 960px) and (max-width: 1279px) {
+  div.padded {
+    margin: 20px;
+    height: 90px;
+    background-color: #fcddde; }
+  div.padded > span {
+    font-size: 0.9em; } }
+
+@media screen and (min-width: 1280px) {
+  div.padded {
+    margin: 25px;
+    height: 100px;
+    background-color: #F2FCE2; }
+  div.padded > span {
+    font-size: 1.0em; } }

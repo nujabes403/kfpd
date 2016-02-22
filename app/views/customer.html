@@ -1,0 +1,36 @@
+<md-whiteframe class="md-whiteframe-3dp"
+               style="max-width:1024px"
+               layout="column" layout-align="center center">
+
+    <div layout="row" flex layout-align="start center" style="width:100%">
+        <div class="md-title"> 거래처관리 </div>
+        <span flex></span>
+        <md-button class="md-raised" href="#/newCustomer"> 등록 </md-button>
+    </div>
+
+    <md-content>
+        <div class="table-responsive">
+            <table class="table md-caption">
+                <thead>
+                    <tr>
+                        <th>거래처 구분</th>
+                        <th>거래처명</th>
+                        <th>주소</th>
+                        <th>대표자</th>
+                        <th>전화번호</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-click="goToDetail(cst.$id)" ng-repeat="cst in customers track by $index">
+                        <td>{{cst.isIndividual | isIndividualText}}</td>
+                        <td>{{cst.name}}</td>
+                        <td>{{cst.address}}</td>
+                        <td>{{cst.president}}</td>
+                        <td>{{cst.tel_no}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </md-content>
+
+</md-whiteframe>

@@ -1,0 +1,248 @@
+<md-whiteframe class="md-whiteframe-3dp"
+               style="max-width:1024px"
+               layout="column" layout-align="center center">
+
+    <div layout="row" flex layout-align="start center" style="width:100%">
+        <div class="md-title"> 새로운 후렘제품 </div>
+        <span flex></span>
+        <md-button class="md-raised" href="#/frames">목록</md-button>
+    </div>
+
+    <md-content style="width:100%;">
+        <form name="cstForm" ng-submit="createFrame()">
+            <md-button class="md-primary md-raised" type="submit"> 등록 </md-button>
+            <md-button class="md-warn md-raised" ng-click="customerForm=null;"> 취소하기 </md-button>
+
+            <md-toolbar style="   background-color: white; color: black; height: 32px; min-height:0px;">
+                <h2 class="md-toolbar-tools">
+                    <span flex> 기본정보 </span>
+                </h2>
+            </md-toolbar>
+            <hr style="margin:0px;"/>
+            <div layout="row" layout-xs="column" style="width:100%; padding:7px;">
+                <div flex="50" flex-xs="100" layout="column">
+                    <div layout="column" layout-align="start start">
+                        <label>바사이즈</label>
+                        <div layout="row" layout-align="start start">
+                            <md-input-container class="md-block">
+                                <input ng-model="customerForm.barMin" name="cstName" type="number" placeholder="최소">
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <input ng-model="customerForm.barMax" name="cstName" type="number" placeholder="최대">
+                            </md-input-container>
+                        </div>
+                    </div>
+                    <div layout="column" layout-align="start start">
+                        <label>사이즈</label>
+                        <div layout="row" layout-align="start start">
+                            <md-input-container class="md-block">
+                                <input ng-model="customerForm.width" name="cstName" type="number" placeholder="폭">
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <input ng-model="customerForm.height" name="cstName" type="number" placeholder="높이">
+                            </md-input-container>
+                        </div>
+                    </div>
+
+                    <div style="height:84px;">
+                        <label> 편개/양개 </label>
+                        <md-radio-group ng-model="customerForm.doorType" layout="row" layout-align="start start">
+                            <md-radio-button value=true class="md-primary"> 편개 </md-radio-button>
+                            <md-radio-button value=false class="md-primary"> 양개 </md-radio-button>
+                        </md-radio-group>
+                    </div>
+                    <div style="height:84px;">
+                        <label> 원클릭 입력 </label>
+                        <md-radio-group ng-model="customerForm.published" layout="row" layout-align="start start">
+                            <md-radio-button value=true class="md-primary"> 사용 </md-radio-button>
+                            <md-radio-button value=false class="md-primary"> 사용안함 </md-radio-button>
+                        </md-radio-group>
+                    </div>
+                </div>
+
+                <div flex="50" flex-xs="100" layout="column">
+                    <div style="height:84px;">
+                        <label>종류</label>
+                        <md-radio-group ng-model="customerForm.type" layout="row" layout-align="start start">
+                            <md-radio-button value=1 class="md-primary">일반</md-radio-button>
+                            <md-radio-button value=2 class="md-primary">스텐</md-radio-button>
+                            <md-radio-button value=3 class="md-primary">매립</md-radio-button>
+                            <md-radio-button value=4 class="md-primary">구로</md-radio-button>
+                            <md-radio-button value=5 class="md-primary">아연</md-radio-button>
+                        </md-radio-group>
+                    </div>
+                    <div>
+                        <label>철판 두께</label>
+                        <md-radio-group ng-model="customerForm.thick" layout="column">
+                            <md-radio-button value=1 class="md-primary">0.8T</md-radio-button>
+                            <md-radio-button value=2 class="md-primary">1.2T</md-radio-button>
+                            <md-radio-button value=3 class="md-primary">1.6T</md-radio-button>
+                            <md-radio-button value=4 class="md-primary">직접입력</md-radio-button>
+                            <div> <input type="number"> <span> T </span> </div>
+                        </md-radio-group>
+                    </div>
+                    <div>
+                        <md-input-container class="md-block">
+                            <label>비고</label>
+                            <textarea ng-model="customerForm.note" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+
+
+            <md-toolbar style="background-color:white; color:black;    height: 32px; min-height:0px;">
+                <h2 class="md-toolbar-tools">
+                    <span flex> 가격정보 </span>
+                </h2>
+            </md-toolbar>
+            <hr style="margin:0px;"/>
+            <div layout="column" style="width:100%; padding:7px;">
+                <div layout-gt-xs="row" flex-gt-xs>
+                    <md-input-container class="md-block" flex-gt-xs>
+                        <label>단가</label>
+                        <input type="number" ng-model="customerForm.orgPrice">
+                    </md-input-container>
+                    <md-datepicker flex-gt-xs ng-model="customerForm.startDate" md-placeholder="Enter date">
+                    </md-datepicker>
+                </div>
+                <div layout="row" layout-align="start center" flex-gt-xs>
+                    <md-input-container class="md-block">
+                        <input ng-model="customerForm.tax" name="cstName" type="number" placeholder="부가세 별도 가격(원)">
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <input ng-model="customerForm.taxRate" name="cstName" type="number" placeholder=" 부가세(원)">
+                    </md-input-container>
+                </div>
+            </div>
+
+
+            <md-button class="md-primary md-raised" ng-click="showAdvanced($event)" flex="100" flex-gt-md="auto">
+                옵션 만들기
+            </md-button>
+            <md-button class="md-primary md-raised" ng-click="showOptions($event)" flex="100" flex-gt-md="auto">
+                옵션 리스트
+            </md-button>
+            <pre>{{frameOptions}}</pre>
+            <!--<div layout="row" style="width:100%; padding:7px;">-->
+
+                <!--<div flex="33" layout="column">-->
+                    <!--<div layout="row" layout-align="start center">-->
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op1" name="cstName" type="number" placeholder="분체도장(원)">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+                    <!--<div layout="row" layout-align="start center">-->
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op2" name="cstName" type="number" placeholder="재료분리대(원)">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+                    <!--<div layout="row" layout-align="start center">-->
+
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op3" name="cstName" type="number" placeholder="철판마감(원)">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+                    <!--<div layout="row" layout-align="start center">-->
+
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op4" name="cstName" type="number" placeholder="바킹(원)">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+                    <!--<div layout="row" layout-align="start center">-->
+
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op5" name="cstName" type="number" placeholder="조방(원)">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div flex="33" layout="column">-->
+                    <!--<div layout="row" layout-align="start center">-->
+
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op6" name="cstName" type="number" placeholder="스텐식기(원)">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+                    <!--<div layout="row" layout-align="start center">-->
+
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op7" name="cstName" type="number" placeholder="중간바(원)">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+                    <!--<div layout="row" layout-align="start center">-->
+
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op8" name="cstName" type="number" placeholder="통식기(원)">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+                    <!--<div layout="row" layout-align="start center">-->
+
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op9" name="cstName" type="number" placeholder="전자키타공(원)">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+                    <!--<div layout="row" layout-align="start center">-->
+
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op10" name="cstName" type="number" placeholder="정첩(원)">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div flex="33" layout="column">-->
+                    <!--<div layout="row" layout-align="start center">-->
+
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op11" name="cstName" type="number" placeholder="후렘가공(-)(원)">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+                    <!--<div layout="row" layout-align="start center">-->
+
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op12" name="cstName" type="number" placeholder="철식기(-)(원)">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+                    <!--<div layout="row" layout-align="start center">-->
+
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op13" name="cstName" type="number" placeholder="유리마감(원)">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+                    <!--<div layout="row" layout-align="start center">-->
+
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op14" name="cstName" type="number" placeholder="통바(원)">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+                    <!--<div layout="row" layout-align="start center">-->
+
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op15" name="cstName" type="number" placeholder="카드키타공(원)">-->
+                        <!--</md-input-container>-->
+                    <!--</div>-->
+                    <!--<div layout="row" layout-align="start center">-->
+
+                        <!--<md-input-container flex="90" class="md-block">-->
+                            <!--<input ng-model="customerForm.op16" name="cstName" type="number" placeholder="오토파워힌지(원)">-->
+                        <!--</md-input-container>-->
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div>
+                <md-input-container class="md-block">
+                    <label>비고</label>
+                    <textarea ng-model="customerForm.note" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                </md-input-container>
+            </div>
+        </form>
+
+
+        <!--<md-toolbar style="background-color:white; color:black;    height: 32px; min-height:0px;">-->
+            <!--<h2 class="md-toolbar-tools">-->
+                <!--<span flex> 거래 이력 </span>-->
+            <!--</h2>-->
+        <!--</md-toolbar>-->
+    </md-content>
+
+</md-whiteframe>

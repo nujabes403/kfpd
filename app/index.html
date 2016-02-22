@@ -1,0 +1,136 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+      <link rel="stylesheet" href="styles/defaultPage.css">
+      <link rel="stylesheet" href="styles/dashboard.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="initApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+
+    <div ng-controller="AppCtrl" layout="column" style="height:100%;" ng-cloak layout-align="start stretch">
+      <md-toolbar>
+        <div class="md-toolbar-tools" ng-controller="LeftCtrl">
+          <md-button  class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()">
+            <md-icon md-svg-icon="dImages/menu.svg"></md-icon>
+          </md-button>
+          <h2>
+            <span> <a href="#/">고려방화문</a> </span>
+          </h2>
+          <span flex></span>
+          <md-button href="#/login" ng-hide-auth aria-label="Favorite">
+            로그인
+            <!--<md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>-->
+          </md-button>
+          <md-button ng-show-auth aria-label="More">
+              로그아웃
+            <!--<md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>-->
+          </md-button>
+        </div>
+      </md-toolbar>
+      <section layout="row" flex>
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+          <md-content layout-padding ng-controller="LeftCtrl">
+            <md-list>
+              <md-subheader class="md-no-sticky"> 고려방화문 </md-subheader>
+              <md-divider ></md-divider>
+              <md-list-item ng-click="goto(menu.href)" ng-repeat="menu in menus">
+                <p>{{ menu.name }}</p>
+              </md-list-item>
+              <md-divider ></md-divider>
+            </md-list>
+          </md-content>
+
+        </md-sidenav>
+
+        <md-content flex layout-padding ng-view=""></md-content>
+      </section>
+    </div>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/angularfire/config.js"></script>
+        <script src="scripts/angularfire/firebase.ref.js"></script>
+        <script src="scripts/controllers/chat.js"></script>
+        <script src="scripts/filters/reverse.js"></script>
+        <script src="scripts/angularfire/auth.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/account.js"></script>
+        <script src="scripts/directives/ngShowAuth.js"></script>
+        <script src="scripts/directives/ngHideAuth.js"></script>
+        <script src="scripts/routes.js"></script>
+        <script src="scripts/controllers/app.js"></script>
+        <script src="scripts/controllers/yo.js"></script>
+        <script src="scripts/controllers/createorder.js"></script>
+        <script src="scripts/controllers/incomeexpense.js"></script>
+        <script src="scripts/controllers/sales.js"></script>
+        <script src="scripts/controllers/billmanage.js"></script>
+        <script src="scripts/controllers/purchase.js"></script>
+        <script src="scripts/controllers/beforebillsearch.js"></script>
+        <script src="scripts/controllers/tax.js"></script>
+        <script src="scripts/controllers/customer.js"></script>
+        <script src="scripts/controllers/product.js"></script>
+        <script src="scripts/controllers/history.js"></script>
+        <script src="scripts/controllers/confirmmanufacture.js"></script>
+        <script src="scripts/controllers/processmanage.js"></script>
+        <script src="scripts/controllers/paintmanage.js"></script>
+        <script src="scripts/controllers/newcustomer.js"></script>
+        <script src="scripts/services/customerservice.js"></script>
+        <script src="scripts/filters/isindividualtext.js"></script>
+        <script src="scripts/controllers/customerdetail.js"></script>
+        <script src="scripts/controllers/frames.js"></script>
+        <script src="scripts/controllers/newframe.js"></script>
+        <script src="scripts/controllers/framedetail.js"></script>
+        <script src="scripts/services/frameservice.js"></script>
+        <script src="scripts/filters/framedoortype.js"></script>
+        <script src="scripts/filters/frametype.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

@@ -1,0 +1,30 @@
+<md-dialog aria-label="Mango (Fruit)"  ng-cloak>
+    <form name="frameOption" ng-submit="createOptions()">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>프레임옵션 리스트</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+           <md-list>
+               <md-list-item ng-repeat="option in options track by $index">
+                   <md-checkbox ng-change="updatePubStatus($index)" class="md-secondary" ng-model="option.published"></md-checkbox>
+                   <p> {{ option.name }} </p>
+                   <!--<span></span>-->
+                   <!--<md-button class="md-warn"> 삭제하기 </md-button>-->
+               </md-list-item>
+           </md-list>
+
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="answer('useful')" style="margin-right:20px;">
+                확인
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
