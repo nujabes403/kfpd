@@ -9,7 +9,8 @@
  */
 angular.module('initApp')
   .controller('NewframeCtrl', function ($scope, $rootScope, $location, FBURL,$firebaseArray,
-                                        $mdDialog, $mdMedia) {
+                                        $mdDialog, $mdMedia,
+                                        FrameService) {
 
     var options = new Firebase(FBURL).child('frameOptions');
     var targetOptions = options.orderByChild('published').equalTo(true);
@@ -72,25 +73,23 @@ angular.module('initApp')
       //  }
       //});
 
-      //CustomerService.addNewCustomer($scope.customerForm);
-      var frimeRef = new Firebase(FBURL).child('frames');
-      var onComplete = function(error) {
-        if (error) {
-          alert('[에러]:'+error);
-        } else {
-          alert('성공적으로 저장되었습니다.');
-          $rootScope.$apply(function() {
-            $location.path("/frames");})
-        }
-      };
-      var newCustomer = frimeRef.push();
-      console.log('d');
-      $scope.customerForm.options = [];
 
+
+      $scope.customerForm.options = [];
+      //resolve additional option information
       $scope.frameOptions.forEach(function(val){
         var option = {name: val.name, price:val.price}
         $scope.customerForm.options.push(option)
       })
-      newCustomer.set($scope.customerForm, onComplete);
+
+      var promise = FrameService.addNewFrame($scope.customerForm);
+      promise.then(function(result){
+        alert('Success: '+ result);
+        $location.path("/frames");
+      },function(error){
+        alert('Error: '+ result);
+      },function(update){
+        console.log(update);
+      })
     }
   });

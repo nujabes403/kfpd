@@ -12,8 +12,6 @@ angular.module('initApp')
     // Service logic
     // ...
 
-    var meaningOfLife = 42;
-
     // Public API here
     return {
       extract: function (arr) {

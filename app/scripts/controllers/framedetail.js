@@ -8,9 +8,12 @@
  * Controller of the initApp
  */
 angular.module('initApp')
-  .controller('FramedetailCtrl', function ($rootScope, $scope, $routeParams, $location, FBURL, $firebaseObject, $mdDialog, $mdMedia) {
+  .controller('FramedetailCtrl', function ($rootScope, $scope, $routeParams, $location,
+                                           FBURL, $firebaseObject,
+                                           $mdDialog, $mdMedia) {
     var frameRef = new Firebase(FBURL).child('frames').child($routeParams.id);
     $scope.frameObj = $firebaseObject(frameRef);
+
     $scope.deleteFrame = function(){
       $scope.frameObj.$remove().then(function(ref) {
         alert('성공적으로 삭제 되었습니다.');
@@ -19,6 +22,7 @@ angular.module('initApp')
         console.log("[에러]::", error);
       });
     }
+
     $scope.updateFrame = function(){
       $scope.frameObj.$save().then(function(ref) {
         alert("성공적으로 업데이트 되었습니다.");
@@ -27,7 +31,6 @@ angular.module('initApp')
         alert("[에러]:", error);
       });
     }
-
 
     $scope.showAdvanced = function(ev) {
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;

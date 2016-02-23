@@ -45,13 +45,14 @@
  *
  */
 angular.module('initApp')
-  .factory('FrameService', function (FBURL, $firebaseArray) {
+  .factory('FrameService', function ($q, FBURL, $firebaseArray) {
     var framesRef = new Firebase(FBURL).child('frames');
     var frmOptionRef = new Firebase(FBURL).child('frameOptions');
 
     var onComplete = function(error) {
       if (error) {
         alert('[에러]:'+error);
+
       } else {
         $location.path('customer');
         alert('성공적으로 저장되었습니다.');
@@ -60,9 +61,17 @@ angular.module('initApp')
     // Public API here
     return {
       addNewFrame: function (frameObj) {
-        console.log(frameObj);
-        var newFrame = framesRef.child(frameObj.name);
-        newFrame.set(frameObj, onComplete);
+        var deferred = $q.defer();
+        deferred.notify('addNewFrame working with: ' + frameObj.type + '.');
+        var newFrame = framesRef.push();
+        newFrame.set(frameObj, function(error) {
+          if (error) {
+            deferred.reject(error);
+          } else {
+            deferred.resolve('성공적으로 저장되었습니다.')
+          }
+        });
+        return deferred.promise;
       },
       updateFrame: function(frameId, frameObj) {
 
