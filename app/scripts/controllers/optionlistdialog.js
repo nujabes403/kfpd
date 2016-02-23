@@ -18,4 +18,7 @@ angular.module('initApp')
       $scope.options.$save()
       $mdDialog.hide(answer);
     };
+    $scope.deleteRecord = function(index){
+      $scope.options.$remove(index);
+    }
   });

@@ -104,7 +104,7 @@
             <div layout="column" style="width:100%; padding:7px;">
                 <div layout-gt-xs="row" flex-gt-xs>
                     <md-input-container class="md-block" flex-gt-xs>
-                        <label>단가</label>
+                        <label>단가: {{customerForm.orgPrice | number}}원 </label>
                         <input type="number" ng-model="customerForm.orgPrice">
                     </md-input-container>
                     <md-datepicker flex-gt-xs ng-model="customerForm.startDate" md-placeholder="Enter date">
@@ -127,6 +127,29 @@
             <md-button class="md-raised" ng-click="showOptions($event)" flex="100" flex-gt-md="auto">
                 옵션 추가 리스트
             </md-button>
+
+            <md-content layout-padding>
+                <md-grid-list
+                        md-cols-xs="2" md-cols-sm="4" md-cols-md="4" md-cols-gt-md="6"
+                        md-row-height-gt-md="3:3" md-row-height="3:3"
+                        md-gutter="5px" md-gutter-gt-sm="5px" >
+                    <md-grid-tile
+                            md-colspan-gt-sm="1"
+                            md-rowspan-gt-sm="1"
+                            ng-repeat="option in frameOptions">
+                        <div layout="row" layout-align="start center">
+                            <md-input-container flex="90" class="md-block">
+                                <label> {{option.name}}({{option.price | number}}원)</label>
+                                <input ng-model="option.price" name="cstName" type="number">
+                                <div class="hint">
+                                    <button type="button" class="md-caption" ng-click="deleteOption()">삭제</button>
+                                </div>
+                            </md-input-container>
+                        </div>
+                    </md-grid-tile>
+                </md-grid-list>
+            </md-content>
+
             <pre>{{frameOptions}}</pre>
             <!--<div layout="row" style="width:100%; padding:7px;">-->
 

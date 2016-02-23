@@ -1,4 +1,4 @@
-<md-dialog aria-label="Mango (Fruit)"  ng-cloak>
+<md-dialog aria-label="Mango (Fruit)"  ng-cloak style="min-width:320px;">
     <form name="frameOption" ng-submit="createOptions()">
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -10,14 +10,14 @@
             </div>
         </md-toolbar>
         <md-dialog-content>
-           <md-list>
-               <md-list-item ng-repeat="option in options track by $index">
-                   <md-checkbox ng-change="updatePubStatus($index)" class="md-secondary" ng-model="option.published"></md-checkbox>
-                   <p> {{ option.name }} </p>
-                   <!--<span></span>-->
-                   <!--<md-button class="md-warn"> 삭제하기 </md-button>-->
-               </md-list-item>
-           </md-list>
+
+
+               <div layout="row" layout-align="center center" style="padding:5px;" ng-repeat="option in options track by $index">
+                   <md-checkbox style="margin-bottom:0px;" ng-change="updatePubStatus($index)" ng-model="option.published"></md-checkbox>
+                   <input ng-change="updatePubStatus($index)" type="text" ng-model="option.name">
+                   <md-button class="md-warn" ng-click="deleteRecord($index)"> 삭제하기 </md-button>
+               </div>
+
 
         </md-dialog-content>
         <md-dialog-actions layout="row">
