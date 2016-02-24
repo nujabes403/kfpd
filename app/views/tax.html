@@ -2,15 +2,18 @@
                style="max-width:1024px"
                layout="column" layout-align="center center">
 
-    <div layout="row" flex layout-align="start center" style="width:100%">
-        <div class="md-title"> 부가세조회 </div>
+    <div layout="column" flex layout-align="start start" style="width:100%">
+        <div class="md-title"> 제품관리 </div>
+        <p class="md-body-1"> 아래의 버튼을 통해 해당 제품의 관리 페이지로 이동 하실수 있습니다.</p>
         <span flex></span>
-        <md-button>저장</md-button>
-        <md-button>목록</md-button>
     </div>
 
     <md-content>
-
+        <md-button class="md-raised" href="#/frames"> 세금계산서 매출 </md-button>
+        <md-button class="md-raised" href="#/doors"> 카드메출 </md-button>
+        <md-button class="md-raised" href="#/gates"> 세금계산서 매입 </md-button>
+        <md-button disabled class="md-raised" href="#/parts"> 카드매입 </md-button>
+        <md-button disabled class="md-raised" href="#/parts"> 부가율 </md-button>
     </md-content>
 
 </md-whiteframe>

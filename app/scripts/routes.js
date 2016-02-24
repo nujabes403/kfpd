@@ -142,13 +142,41 @@ angular.module('initApp')
         templateUrl: 'views/frames.html',
         controller: 'FramesCtrl'
       })
-      .when('/newFrame', {
-        templateUrl: 'views/newframe.html',
+      .when('/frame-new', {
+        templateUrl: 'views/frame-new.html',
         controller: 'NewframeCtrl'
       })
       .when('/frameDetail/:id', {
         templateUrl: 'views/framedetail.html',
         controller: 'FramedetailCtrl'
+      })
+      .when('/doors', {
+        templateUrl: 'views/doors.html',
+        controller: 'DoorsCtrl'
+      })
+      .when('/doors-detail/edit/:id', {
+        templateUrl: 'views/doors-detail.html',
+        controller: 'DoorsDetailCtrl'
+      })
+      .when('/doors-detail/new', {
+        templateUrl: 'views/doors-detail.html',
+        controller: 'DoorsNewCtrl'
+      })
+      .when('/gates', {
+        templateUrl: 'views/gates.html',
+        controller: 'GatesCtrl'
+      })
+      .when('/gate-detail', {
+        templateUrl: 'views/gate-detail.html',
+        controller: 'GateDetailCtrl'
+      })
+      .when('/parts', {
+        templateUrl: 'views/parts.html',
+        controller: 'PartsCtrl'
+      })
+      .when('/part-detail', {
+        templateUrl: 'views/part-detail.html',
+        controller: 'PartDetailCtrl'
       })
       .otherwise({redirectTo: '/'});
   }])

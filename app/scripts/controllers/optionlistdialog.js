@@ -21,4 +21,8 @@ angular.module('initApp')
     $scope.deleteRecord = function(index){
       $scope.options.$remove(index);
     }
+    $scope.createNewOption = function(newOptionName){
+      FrameService.createOptions(newOptionName)
+    }
+
   });

@@ -5,7 +5,7 @@
     <div layout="row" flex layout-align="start center" style="width:100%">
         <div class="md-title"> 새로운 후렘제품 </div>
         <span flex></span>
-        <md-button class="md-raised" href="#/frames">목록</md-button>
+        <md-button class="md-raised" href="#/frame-new">목록</md-button>
     </div>
     <p class="md-caption"> 폼을 작성하신뒤 <b>등록버튼</b> 누르셔서 저장을 하실수 있습니다. </p>
     <p class="md-caption"> <b>취소버튼</b> 누르시면 작성된 폼을 리셋을 합니다. </p>
@@ -119,11 +119,9 @@
                     </md-input-container>
                 </div>
             </div>
+            <md-button ng-click="getOptions()">Get Options</md-button>
 
             <div class="md-body-1"> 추가 옵션을 관리 하실수 있습니다. </div>
-            <md-button class="md-raised" ng-click="showAdvanced($event)" flex="100" flex-gt-md="auto">
-                새로운 옵션 만들기
-            </md-button>
             <md-button class="md-raised" ng-click="showOptions($event)" flex="100" flex-gt-md="auto">
                 옵션 추가 리스트
             </md-button>
@@ -150,112 +148,9 @@
                 </md-grid-list>
             </md-content>
 
+
             <pre>{{frameOptions}}</pre>
-            <!--<div layout="row" style="width:100%; padding:7px;">-->
 
-                <!--<div flex="33" layout="column">-->
-                    <!--<div layout="row" layout-align="start center">-->
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op1" name="cstName" type="number" placeholder="분체도장(원)">-->
-                        <!--</md-input-container>-->
-                    <!--</div>-->
-                    <!--<div layout="row" layout-align="start center">-->
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op2" name="cstName" type="number" placeholder="재료분리대(원)">-->
-                        <!--</md-input-container>-->
-                    <!--</div>-->
-                    <!--<div layout="row" layout-align="start center">-->
-
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op3" name="cstName" type="number" placeholder="철판마감(원)">-->
-                        <!--</md-input-container>-->
-                    <!--</div>-->
-                    <!--<div layout="row" layout-align="start center">-->
-
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op4" name="cstName" type="number" placeholder="바킹(원)">-->
-                        <!--</md-input-container>-->
-                    <!--</div>-->
-                    <!--<div layout="row" layout-align="start center">-->
-
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op5" name="cstName" type="number" placeholder="조방(원)">-->
-                        <!--</md-input-container>-->
-                    <!--</div>-->
-                <!--</div>-->
-
-                <!--<div flex="33" layout="column">-->
-                    <!--<div layout="row" layout-align="start center">-->
-
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op6" name="cstName" type="number" placeholder="스텐식기(원)">-->
-                        <!--</md-input-container>-->
-                    <!--</div>-->
-                    <!--<div layout="row" layout-align="start center">-->
-
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op7" name="cstName" type="number" placeholder="중간바(원)">-->
-                        <!--</md-input-container>-->
-                    <!--</div>-->
-                    <!--<div layout="row" layout-align="start center">-->
-
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op8" name="cstName" type="number" placeholder="통식기(원)">-->
-                        <!--</md-input-container>-->
-                    <!--</div>-->
-                    <!--<div layout="row" layout-align="start center">-->
-
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op9" name="cstName" type="number" placeholder="전자키타공(원)">-->
-                        <!--</md-input-container>-->
-                    <!--</div>-->
-                    <!--<div layout="row" layout-align="start center">-->
-
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op10" name="cstName" type="number" placeholder="정첩(원)">-->
-                        <!--</md-input-container>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div flex="33" layout="column">-->
-                    <!--<div layout="row" layout-align="start center">-->
-
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op11" name="cstName" type="number" placeholder="후렘가공(-)(원)">-->
-                        <!--</md-input-container>-->
-                    <!--</div>-->
-                    <!--<div layout="row" layout-align="start center">-->
-
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op12" name="cstName" type="number" placeholder="철식기(-)(원)">-->
-                        <!--</md-input-container>-->
-                    <!--</div>-->
-                    <!--<div layout="row" layout-align="start center">-->
-
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op13" name="cstName" type="number" placeholder="유리마감(원)">-->
-                        <!--</md-input-container>-->
-                    <!--</div>-->
-                    <!--<div layout="row" layout-align="start center">-->
-
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op14" name="cstName" type="number" placeholder="통바(원)">-->
-                        <!--</md-input-container>-->
-                    <!--</div>-->
-                    <!--<div layout="row" layout-align="start center">-->
-
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op15" name="cstName" type="number" placeholder="카드키타공(원)">-->
-                        <!--</md-input-container>-->
-                    <!--</div>-->
-                    <!--<div layout="row" layout-align="start center">-->
-
-                        <!--<md-input-container flex="90" class="md-block">-->
-                            <!--<input ng-model="customerForm.op16" name="cstName" type="number" placeholder="오토파워힌지(원)">-->
-                        <!--</md-input-container>-->
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
             <div>
                 <md-input-container class="md-block">
                     <label>비고</label>

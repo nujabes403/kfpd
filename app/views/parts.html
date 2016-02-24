@@ -3,9 +3,9 @@
                layout="column" layout-align="center center">
 
     <div layout="row" flex layout-align="start center" style="width:100%">
-        <div class="md-title"> 매입 관리 </div>
+        <div class="md-title"> 부속품 관리 </div>
         <span flex></span>
-        <md-button class="md-raised" href="#/doors-detail/new"> 등록 </md-button>
+        <md-button class="md-raised" href="#/doors-detail/new"> 문등록 </md-button>
     </div>
 
     <md-content>
@@ -13,11 +13,12 @@
             <table class="table md-caption">
                 <thead>
                 <tr>
-                    <th style="text-align: center">매입일</th>
-                    <th style="text-align: center">거래처명</th>
-                    <th style="text-align: center">품목</th>
-                    <th style="text-align: center">입고일</th>
-
+                    <th style="text-align: center">종류</th>
+                    <th style="text-align: center">편개/양개</th>
+                    <th style="text-align: center">철판</th>
+                    <th style="text-align: center">폭</th>
+                    <th style="text-align: center">높이</th>
+                    <th style="text-align: center">가격</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,8 @@
                     <td style="padding:7px; text-align: center">{{dr.doorType | frameDoorType}}</td>
                     <td style="padding:7px; text-align: end">{{dr.thick}}</td>
                     <td style="padding:7px; text-align: end">{{dr.width}}</td>
+                    <td style="padding:7px; text-align: end">{{dr.height}}</td>
+                    <td style="padding:7px; text-align: end">{{dr.orgPrice | number}}원</td>
                 </tr>
                 </tbody>
             </table>

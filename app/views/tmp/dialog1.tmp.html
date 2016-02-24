@@ -10,20 +10,11 @@
             </div>
         </md-toolbar>
         <md-dialog-content layout-padding>
-
             <md-content>
                 <md-input-container class="md-block">
-                    <input ng-change="checkDuplicate()" ng-model="optionForm.name" name="name" type="text" required placeholder="거래처명">
-                    <div class="hint" ng-if="isDup"><span style="color:red"> <b>{{optionForm.name}}</b> 거래처명은 이미 등록이 되어 있습니다. </span>
-                    </div>
-                    <div class="hint" ng-if="!isDup">{{optionForm.name}} 옵션이름은 사용하실수 있습니다. </div>
-                    <div ng-messages="frameOption.name.$error" ng-if="!showHints">
-                        <div ng-message="required">필수 항목 입니다.</div>
-                    </div>
+                    <input ng-model="optionName" name="name" type="text" required placeholder="옵션이름">
                 </md-input-container>
             </md-content>
-
-
         </md-dialog-content>
         <md-dialog-actions layout="row">
             <span flex></span>

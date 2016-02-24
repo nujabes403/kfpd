@@ -20,23 +20,9 @@ angular.module('initApp')
     };
     $scope.optionForm = {name:'', price:0, published: true};
     $scope.isDup = false;
-    var optionRef = new Firebase(FBURL).child('frameOptions')
-    $scope.checkDuplicate = function(){
-      console.log('check');
-      if($scope.optionForm.name.length !== 0){
-        var result = $firebaseObject(optionRef.child($scope.optionForm.name));
-        result.$loaded().then(function(data){
-          console.log(data)
-          if(data.name==null){
-            $scope.isDup = false;
-          }
-          else{
-            $scope.isDup = true;
-          }
-        })
-      }
-    }
+    var optionRef = new Firebase(FBURL).child('frameOptions');
+
     $scope.createOptions = function(){
-      FrameService.createOptions($scope.optionForm)
+      FrameService.createOptions($scope.optionName)
     }
   });
